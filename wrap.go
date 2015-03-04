@@ -26,7 +26,7 @@ func WrapString(s string, lim int) ([]string, int) {
 	var lines []string
 	max := 0
 	for _, v := range words {
-		max = len(v)
+		max = DisplayWidth(string(v))
 		if max > lim {
 			lim = max
 		}
@@ -54,9 +54,9 @@ func WrapWords(words [][]byte, spc, lim, pen int) [][][]byte {
 	length := make([][]int, n)
 	for i := 0; i < n; i++ {
 		length[i] = make([]int, n)
-		length[i][i] = len(words[i])
+		length[i][i] = DisplayWidth(string(words[i]))
 		for j := i + 1; j < n; j++ {
-			length[i][j] = length[i][j-1] + spc + len(words[j])
+			length[i][j] = length[i][j-1] + spc + DisplayWidth(string(words[j]))
 		}
 	}
 	nbrk := make([]int, n)
